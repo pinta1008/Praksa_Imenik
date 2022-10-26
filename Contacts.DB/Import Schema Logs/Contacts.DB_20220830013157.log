@@ -1,0 +1,88 @@
+30.8.2022. 15:31:57	This log contains information about the import schema operation into project 'Contacts.DB' on computer 'DESKTOP-PBODN35' by user 'pinta'.
+30.8.2022. 15:31:57	Import of database schema has started.
+30.8.2022. 15:32:03	Gathering database credentials
+30.8.2022. 15:32:03	Gathering database options
+30.8.2022. 15:32:03	Gathering generic database scoped configuration option
+30.8.2022. 15:32:03	Gathering users
+30.8.2022. 15:32:03	Gathering roles
+30.8.2022. 15:32:03	Gathering application roles
+30.8.2022. 15:32:03	Gathering role memberships
+30.8.2022. 15:32:03	Gathering filegroups
+30.8.2022. 15:32:03	Gathering full-text catalogs
+30.8.2022. 15:32:03	Gathering assemblies
+30.8.2022. 15:32:03	Gathering certificates
+30.8.2022. 15:32:03	Gathering asymmetric keys
+30.8.2022. 15:32:03	Gathering symmetric keys
+30.8.2022. 15:32:03	Gathering encrypted symmetric keys
+30.8.2022. 15:32:03	Gathering schemas
+30.8.2022. 15:32:03	Gathering XML schema collections
+30.8.2022. 15:32:03	Gathering user-defined data types
+30.8.2022. 15:32:03	Gathering user-defined types
+30.8.2022. 15:32:03	Gathering table types
+30.8.2022. 15:32:03	Gathering unique keys for table types
+30.8.2022. 15:32:03	Gathering primary keys for table types
+30.8.2022. 15:32:03	Gathering indexes for table types
+30.8.2022. 15:32:04	Gathering check constraints for table types
+30.8.2022. 15:32:04	Gathering default constraints for table types
+30.8.2022. 15:32:04	Gathering partition functions
+30.8.2022. 15:32:04	Gathering partition schemes
+30.8.2022. 15:32:04	Gathering functions
+30.8.2022. 15:32:04	Gathering encrypted functions
+30.8.2022. 15:32:04	Gathering aggregates
+30.8.2022. 15:32:04	Gathering procedures
+30.8.2022. 15:32:04	Gathering encrypted procedures
+30.8.2022. 15:32:04	Gathering tables
+30.8.2022. 15:32:04	Gathering primary keys
+30.8.2022. 15:32:04	Gathering unique constraints
+30.8.2022. 15:32:04	Gathering foreign keys
+30.8.2022. 15:32:04	Gathering default constraints
+30.8.2022. 15:32:04	Gathering check constraints
+30.8.2022. 15:32:04	Gathering views
+30.8.2022. 15:32:04	Gathering encrypted views
+30.8.2022. 15:32:04	Gathering indexes
+30.8.2022. 15:32:04	Gathering statistics
+30.8.2022. 15:32:04	Gathering full-text index stoplists
+30.8.2022. 15:32:04	Gathering search property lists
+30.8.2022. 15:32:04	Gathering search properties
+30.8.2022. 15:32:04	Gathering full-text indexes
+30.8.2022. 15:32:04	Gathering column store indexes
+30.8.2022. 15:32:04	Gathering spatial indexes
+30.8.2022. 15:32:04	Gathering XML indexes
+30.8.2022. 15:32:04	Gathering Selective XML indexes
+30.8.2022. 15:32:04	Gathering encrypted triggers
+30.8.2022. 15:32:04	Gathering triggers
+30.8.2022. 15:32:04	Gathering encrypted and clr ddl triggers
+30.8.2022. 15:32:04	Gathering ddl triggers
+30.8.2022. 15:32:04	Creating edge constraints
+30.8.2022. 15:32:04	Gathering synonyms
+30.8.2022. 15:32:04	Gathering defaults
+30.8.2022. 15:32:04	Gathering data constraint uddt bindings
+30.8.2022. 15:32:04	Gathering rules
+30.8.2022. 15:32:04	Gathering data constraint uddt bindings
+30.8.2022. 15:32:04	Gathering message types
+30.8.2022. 15:32:04	Gathering queues
+30.8.2022. 15:32:04	Gathering contracts
+30.8.2022. 15:32:04	Gathering services
+30.8.2022. 15:32:04	Gathering event notifications
+30.8.2022. 15:32:04	Gathering remote service bindings
+30.8.2022. 15:32:04	Gathering broker priorities
+30.8.2022. 15:32:04	Gathering signatures
+30.8.2022. 15:32:04	Gathering data compression options
+30.8.2022. 15:32:04	Gathering sequence types
+30.8.2022. 15:32:04	Gathering security policies
+30.8.2022. 15:32:04	Gather column encryption keys
+30.8.2022. 15:32:04	Gathering column master keys
+30.8.2022. 15:32:04	Gathering external data sources
+30.8.2022. 15:32:04	Gathering external file formats
+30.8.2022. 15:32:04	Gathering external tables
+30.8.2022. 15:32:04	Gathering database permissions
+30.8.2022. 15:32:04	Gathering extended properties
+30.8.2022. 15:32:04	Gathering assemblies
+30.8.2022. 15:32:04	Gathering credentials
+30.8.2022. 15:32:04	Gathering logins
+30.8.2022. 15:32:04	Gathering server audits
+30.8.2022. 15:32:05	Scanning project for duplicate elements
+30.8.2022. 15:32:05	Finished duplicate element processing
+30.8.2022. 15:32:06	Finished importing database.
+30.8.2022. 15:32:06	A summary of the import was saved to the following location: C:\Users\pinta\Desktop\Praksa\Contacts.Web\Contacts.DB\Import Schema Logs\Contacts.DB_20220830013157.log
+30.8.2022. 15:32:06	Click Finish to continue...

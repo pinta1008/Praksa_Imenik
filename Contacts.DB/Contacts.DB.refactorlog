@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="b882ecde-c9f6-4d43-ab5a-35db45a99432" ChangeDateTime="09/01/2022 16:18:01">
+    <Property Name="ElementName" Value="[dbo].[Contacts1].[Tel_num]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contacts1]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TelephoneNumber" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="df141e6d-d778-4a9a-8a58-cf01e5640536" ChangeDateTime="09/01/2022 16:18:03">
+    <Property Name="ElementName" Value="[dbo].[Contacts1].[Mail]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contacts1]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Email" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bcd66dfa-450f-48a3-b276-aa6700700655" ChangeDateTime="09/01/2022 16:18:07">
+    <Property Name="ElementName" Value="[dbo].[Contacts1].[Date_crea]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contacts1]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateCreated" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="84933bfa-70d4-4a2a-9138-cb7c915e3834" ChangeDateTime="09/01/2022 16:18:10">
+    <Property Name="ElementName" Value="[dbo].[Contacts1].[Time_crea]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contacts1]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TimeCreated" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ec6841a0-a86d-4b61-951e-e177c7fa51ea" ChangeDateTime="09/01/2022 16:18:14">
+    <Property Name="ElementName" Value="[dbo].[Contacts1].[Date_change]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contacts1]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateChanged" />
+  </Operation>
+</Operations>
