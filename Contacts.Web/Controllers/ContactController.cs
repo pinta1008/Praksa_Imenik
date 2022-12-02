@@ -22,19 +22,30 @@ namespace Contacts.Web.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IContactServices _contactServices;
-       // private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public ContactController(IConfiguration Configuration, IContactServices contactServices) //IMapper mapper)
+        public ContactController(IConfiguration Configuration, IContactServices contactServices,IMapper mapper)
         {
             _configuration = Configuration;
             _contactServices = contactServices;
-            //_mapper = mapper;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pg = 1)
         {
             var contacts = _contactServices.GetList();
-            return View(contacts);
+            const int pageSize = 2;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int recsCount = contacts.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = contacts.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+
+            return View(data);
         }
 
         public IActionResult Privacy()
@@ -49,7 +60,7 @@ namespace Contacts.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id) //prikaz
+        public IActionResult Edit(int? id)
         {
             ContactDto newContact = new ContactDto();
             if (id > 0)
@@ -60,11 +71,37 @@ namespace Contacts.Web.Controllers
             return View(newContact);
         }
         [HttpPost]
-        public IActionResult Edit(ContactDto contact, int id) //azuriranje kreiranje
+        public IActionResult Edit(ContactEditViewModel VMcontact, int id)
+        {
+            ContactDto contactDto = new ContactDto();
+            _mapper.Map(VMcontact, contactDto);
+            try
+            {
+                _contactServices.Edit(contactDto);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            ContactDto newContact = new ContactDto();
+            if (id > 0)
+            {
+                newContact = _contactServices.GetById(id);
+            }
+
+            return View(newContact);
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
         {
             try
             {
-                _contactServices.Edit(contact);
+                _contactServices.DeleteContact(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -73,53 +110,9 @@ namespace Contacts.Web.Controllers
             }
         }
 
-       /* public IActionResult Create()
-        {
-            return View();
-        }
-       */
 
-       /* [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(ContactEditViewModel contact) //tu ide taj json 
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    ContactEditViewModel addContact = new ContactEditViewModel(); //sql procedura s ifom ako je id > 0 update inace create
 
-                    if (_contactServices.Create(contact))
-                    {
-                        //umjesto IactionResult vrati se json
-                        ModelState.Clear();
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
 
-        } */
-
-        [HttpPost]
-        public IActionResult Delete(int id) //json umjesto IActionResult
-        {
-            try
-            {
-                if(_contactServices.DeleteContact(id))
-                {
-                    
-                }
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
     
 }

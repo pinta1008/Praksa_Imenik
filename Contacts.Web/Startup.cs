@@ -27,7 +27,7 @@ namespace Contacts.Web
         {
             services.AddScoped<IContactServices, ContactsService>();
             services.AddControllersWithViews();
-            //services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             
         }
 

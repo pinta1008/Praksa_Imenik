@@ -11,14 +11,14 @@ namespace Contacts.Services
 {
     public interface IContactServices
     {
-        ContactDto GetById(int Id);
+        ContactDto GetById(int? Id);
         List<ContactDto> GetList();
-        public bool Create(ContactDto contact);
+       // public bool Create(ContactDto contact);
 
         public bool Edit(ContactDto contact);
 
 
-        public bool DeleteContact(int id);
+        public bool DeleteContact(int? id);
     }
     public class ContactsService : IContactServices
     {
@@ -32,56 +32,29 @@ namespace Contacts.Services
         {
             this._configuration = Configuration;
         }
-        public bool Create(ContactDto contact)
-        {
-            string ConnectionString = _configuration.GetConnectionString("DefaultConnection");
+       
+         public bool Edit(ContactDto contact)
+         {
+             string ConnectionString = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
-                SqlCommand cmd = new SqlCommand("spAddorEditContacts", sqlConn); //spContactEdit
+                SqlCommand cmd = new SqlCommand("spAddorEditContacts", sqlConn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", 0);
+                cmd.Parameters.AddWithValue("@Id", contact.Id);
                 cmd.Parameters.AddWithValue("@Name", contact.FirstName);
                 cmd.Parameters.AddWithValue("@Surname", contact.LastName);
                 cmd.Parameters.AddWithValue("@TelephoneNumber", contact.TelephoneNumber);
                 cmd.Parameters.AddWithValue("@Email", contact.Email);
-                cmd.Parameters.AddWithValue("@DateCreated", contact.DateCreated);
-                cmd.Parameters.AddWithValue("@TimeCreated", contact.TimeCreated);
-                cmd.Parameters.AddWithValue("@DateChanged", contact.DateChanged);
                 int i = cmd.ExecuteNonQuery();
                 if (i >= 1)
                     return true;
                 else
                     return false;
             }
-
-
-        }
-         public bool Edit(ContactDto contact)
-         {
-             string ConnectionString = _configuration.GetConnectionString("DefaultConnection");
-             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
-             {
-                 sqlConn.Open();
-                 SqlCommand cmd = new SqlCommand("spAddorEditContacts", sqlConn);
-                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                 cmd.Parameters.AddWithValue("@Id", contact.Id);
-                 cmd.Parameters.AddWithValue("@Name", contact.FirstName);
-                 cmd.Parameters.AddWithValue("@Surname", contact.LastName);
-                 cmd.Parameters.AddWithValue("@TelephoneNumber", contact.TelephoneNumber);
-                 cmd.Parameters.AddWithValue("@Email", contact.Email);
-                 cmd.Parameters.AddWithValue("@DateCreated", contact.DateCreated);
-                 cmd.Parameters.AddWithValue("@TimeCreated", contact.TimeCreated);
-                 cmd.Parameters.AddWithValue("@DateChanged", contact.DateChanged);
-                 int i = cmd.ExecuteNonQuery();
-                 if (i >= 1)
-                     return true;
-                 else
-                     return false;
-             }
-
+            
          } 
-        public bool DeleteContact(int id)
+        public bool DeleteContact(int? id)
         {
             string ConnectionString = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
@@ -97,23 +70,27 @@ namespace Contacts.Services
                     return false;
             }
         }
-        public ContactDto GetById(int Id)
+        public ContactDto GetById(int? Id)
         {
             string ConnectionString = _configuration.GetConnectionString("DefaultConnection");
 
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
-                SqlCommand cmd = new SqlCommand("spContactGetList", sqlConn);
+                SqlCommand cmd = new SqlCommand("spContactById", sqlConn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", Id);
 
                 using (SqlDataReader Reader = cmd.ExecuteReader())
                 {
-                    var details = ToContactDto(Reader);
-                    return details;
+                    if (Reader.Read())
+                    {
+                        var details = ToContactDto(Reader);
+                        return details;
+                    }
+                    return null;
+                    
                 }
-
-
 
             }
         }
@@ -148,24 +125,23 @@ namespace Contacts.Services
         private static ContactDto ToContactDto(SqlDataReader Reader)
         {
             var details = new ContactDto();
-            details.Id = Reader["Id"] != DBNull.Value ? Convert.ToInt32(Reader["Id"].ToString()) : int.MinValue;
+            details.Id = Reader["Id"] != DBNull.Value ? Convert.ToInt32(Reader["Id"]) : int.MinValue;
             details.FirstName = Reader["Name"] != DBNull.Value ? Convert.ToString(Reader["Name"]) : null;
             details.LastName = Reader["Surname"] != DBNull.Value ? Convert.ToString(Reader["Surname"]) : null;
             details.TelephoneNumber = Reader["TelephoneNumber"] != DBNull.Value ? Convert.ToString(Reader["TelephoneNumber"]) : null;
             details.Email = Reader["Email"] != DBNull.Value ? Convert.ToString(Reader["Email"]) : null;
             details.DateCreated = Reader["DateCreated"] != DBNull.Value ? Convert.ToDateTime(Reader["DateCreated"]) : DateTime.MinValue;
-            details.TimeCreated = Reader["TimeCreated"] != DBNull.Value ? Convert.ToDateTime(Reader["TimeCreated"]) : DateTime.MinValue;
             details.DateChanged = Reader["DateChanged"] != DBNull.Value ? Convert.ToDateTime(Reader["DateChanged"]) : DateTime.MinValue;
             return details;
         }
     }
-    //public class AutoMapperProfiles : Profile
-   // {
-        //public AutoMapperProfiles()
-       // {
-        //  CreateMap<ContactDto, ContactEditViewModel > ();
-        //}
-    //}
+    public class AutoMapperProfiles : Profile
+    {
+        public AutoMapperProfiles()
+        {
+          CreateMap<ContactDto, ContactEditViewModel > ().ReverseMap();
+        }
+    }
 
     public class ContactDto
     {
@@ -182,7 +158,6 @@ namespace Contacts.Services
         public string Email { get; set; }
         [Required]
         public DateTime DateCreated { get; set; }
-        public DateTime TimeCreated { get; set; }
         public DateTime DateChanged { get; set; }
        
 
@@ -199,7 +174,6 @@ namespace Contacts.Services
         public string TelephoneNumber { get; set; }
         public string Email { get; set; }
         public DateTime DateCreated { get; set; }
-        public DateTime TimeCreated { get; set; }
         public DateTime DateChanged { get; set; }
     }
    
